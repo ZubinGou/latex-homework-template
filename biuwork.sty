@@ -1,0 +1,71 @@
+\ProvidesClass{biuwork}
+%% configuration of nested enumerate env
+\RequirePackage{enumitem}
+%% required by macro DeclareMathOperator
+\RequirePackage{amsmath}
+%% Set up page headers using with fancyhdr
+\RequirePackage{fancyhdr}
+\RequirePackage{amsthm}
+%% semester
+\def\@term{term}
+\newcommand{\theterm}[1]{\renewcommand\@term{#1}}
+%% institute
+\newcommand{\@courseinstitute}[1]{institute}
+\newcommand{\thecourseinstitute}[1]{\renewcommand\@courseinstitute{#1}}
+%% coursename
+\newcommand{\@coursename}[1]{coursename}
+\newcommand{\thecoursename}[1]{\renewcommand\@coursename{\textsc{#1}}}
+%% user can rewrite homework name
+\def\@hwname{Homework}
+\def\hwname#1{\renewcommand\@hwname{#1}}
+
+
+%% page header setup, distinguish between first page(plain style)
+%% and second page on (runningpage style)
+%%***************************************************************************
+\newcommand{\courseheader}{
+\thispagestyle{plain}%first page use native plain style to suppress header
+\vspace*{-1in}
+\begin{center}
+\@courseinstitute\\
+\@coursename\\
+\@term
+\vspace*{0.1in}
+\hrule
+\end{center}
+\begin{center}
+  \underline{\bf \@hwname}
+\end{center}
+}
+
+\fancypagestyle{runningpage}
+{
+  \fancyhead[L]{\small\@coursename}
+  \fancyhead[R]{\small\@courseinstitute}
+}
+%% use runningpage style from second page on
+\pagestyle{runningpage}
+
+%% enumitem related configuration
+\setlist[enumerate,1]{label=(\arabic*)}
+\setlist[enumerate,2]{label=(\alph*)}
+\setlist[enumerate,3]{label=\roman*.}
+\setlist[enumerate,4]{label=\greek*}
+
+%% *********************************************************************************************
+%%name command macro
+%%*************************
+\newcommand{\name}[2]{
+\begin{flushleft}
+  #1 \quad #2
+  \hfill
+  \today
+\end{flushleft}
+\hrule
+
+\vspace{2em}
+
+\flushleft
+}
+%%*************************
+
